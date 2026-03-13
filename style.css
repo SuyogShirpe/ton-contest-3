@@ -282,36 +282,52 @@ body {
   padding: 10px;
   cursor: pointer;
 }
+/* --- UPDATED PANEL HEADER (CENTERED & BIG LOGO) --- */
 .panel-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 10px 0 20px;
+    display: flex;
+    flex-direction: column; /* Stacks the logo, title, and badge vertically */
+    align-items: center;    /* Centers everything horizontally */
+    text-align: center;
+    gap: 12px;
+    margin: 10px 0 24px;
 }
+
 #panel-logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+    width: 96px;   /* Much larger logo */
+    height: 96px;  /* Much larger logo */
+    border-radius: 50%;
+    border: 3px solid rgba(0, 152, 234, 0.5); /* TON Blue glowing border */
+    box-shadow: 0 0 20px rgba(0, 152, 234, 0.3);
+    object-fit: cover;
+    margin-bottom: 5px;
 }
+
+/* Centers the title and badge perfectly */
+.panel-header div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#panel-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
 .category-badge {
-  display: inline-block;
-  background: #0098ea;
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: bold;
-  margin-top: 5px;
-}
-.panel-body p {
-  margin-bottom: 16px;
-  line-height: 1.5;
-  color: #c5c6c7;
-  font-size: 14px;
-}
-.panel-body strong {
-  color: #fff;
+    display: inline-block;
+    background: #0098ea;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0, 152, 234, 0.3);
 }
 .action-btn {
   display: block;
