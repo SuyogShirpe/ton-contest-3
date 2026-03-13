@@ -1,0 +1,326 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+
+
+/* 📱 The Mobile Screen Simulator */
+.mobile-app-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 430px; /* Locks it to phone width on desktop */
+  height: 100dvh;
+  background-color: #0b0c10;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(0, 152, 234, 0.15); /* Nice glow on desktop */
+}
+
+.app-header {
+    position: absolute;
+    top: 50px; /* Safe distance from the mobile status bar */
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+    pointer-events: none; /* Allows tapping planets through the text */
+}
+.cosmic-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+    /* This creates the deep space neon glow effect */
+    text-shadow: 0 0 15px rgba(0, 152, 234, 0.8), 0 0 30px rgba(0, 152, 234, 0.4);
+}
+
+.cosmic-subtitle {
+    font-size: 13px;
+    color: #45a29e;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.signature {
+    position: absolute;
+    bottom: 25px; /* Sits nicely at the bottom of the screen */
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.971);
+    letter-spacing: 1px;
+    z-index: 10;
+    pointer-events: none; /* Allows tapping planets through the text */
+}
+
+/* Optional: Make the signature glow slightly when the app is active */
+.signature {
+    animation: pulse-text 4s infinite alternate;
+}
+
+@keyframes pulse-text {
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; text-shadow: 0 0 8px rgba(255,255,255,0.3); }
+}
+
+.stars-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 40% 70%, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 90% 40%, #ffffff, rgba(0, 0, 0, 0));
+  background-size: 200px 200px;
+  z-index: 0;
+}
+
+.universe {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.solar-system {
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+.sun {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px; /* Increased from 46px */
+    height: 52px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.sun img {
+    width: 100%; 
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    object-fit: cover;
+    display: block;
+}
+
+.sun-glow {
+  position: absolute;
+  inset: -8px;
+  background: rgba(0, 152, 234, 0.5);
+  border-radius: 50%;
+  filter: blur(12px);
+  z-index: 1;
+  animation: pulse 3s infinite alternate;
+}
+
+/* The orbit container no longer has a dashed border */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+/* This pseudo-element creates the fading white trail */
+.orbit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 2px; /* Thickness of the trail */
+
+  /* CHANGED: Transparent from 0 to 270 degrees, then fades in for the last 90 degrees (25%) */
+  background: conic-gradient(
+    transparent 0deg,
+    transparent 270deg,
+    rgba(255, 255, 255, 0.8) 360deg
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.planet-container {
+    position: absolute;
+    top: 0; left: 50%;
+    width: 24px; 
+    height: 24px;
+    margin-left: -12px; 
+    margin-top: -12px;  
+    border-radius: 50%;
+    cursor: pointer;
+    background: #1f2833;
+    pointer-events: auto; 
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* --- THE NEW GLOW EFFECT --- */
+    border: none; /* Removes the solid line */
+    box-shadow: 0 0 6px rgba(0, 152, 234, 0.8), 0 0 12px rgba(0, 152, 234, 0.4); /* Creates a layered, soft cyan glow */
+}
+
+.planet-container:active {
+  transform: scale(0.9);
+}
+.planet-container img { 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 50%; 
+    
+    /* THE FIXES */
+    object-fit: cover; /* Ensures non-square images zoom in and crop perfectly rather than squishing */
+    display: block;    /* Removes standard web-browser spacing under images */
+    transform: scale(1.05); /* Scales the image up by a hair to prevent any tiny pixel gaps near the border */
+}
+
+@keyframes spin {
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes counter-spin {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes pulse {
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.paused .orbit,
+.paused .planet-container {
+  animation-play-state: paused !important;
+}
+
+/* 📝 Mobile Bottom Sheet */
+.info-overlay {
+  position: absolute; /* Kept inside the wrapper */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 999;
+}
+.info-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.info-panel {
+  position: absolute; /* Kept inside the wrapper */
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  background: #12161f;
+  border-radius: 24px 24px 0 0;
+  padding: 24px 20px 32px;
+  transition: bottom 0.3s cubic-bezier(0.175, 0.885, 0.32, 1);
+  z-index: 1000;
+}
+.info-panel.active {
+  bottom: 0;
+}
+
+.info-panel::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: #3a404d;
+  border-radius: 2px;
+}
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 28px;
+  padding: 10px;
+  cursor: pointer;
+}
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 10px 0 20px;
+}
+#panel-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+.category-badge {
+  display: inline-block;
+  background: #0098ea;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.panel-body p {
+  margin-bottom: 16px;
+  line-height: 1.5;
+  color: #c5c6c7;
+  font-size: 14px;
+}
+.panel-body strong {
+  color: #fff;
+}
+.action-btn {
+  display: block;
+  padding: 14px;
+  text-align: center;
+  background: #0098ea;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: bold;
+  margin-top: 20px;
+}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="theme-color" content="#0b0c10" />
+    <title>TON Solar System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="mobile-app-wrapper">
+      <div class="stars-bg"></div>
+
+      <header class="app-header">
+        <h1 class="cosmic-title">TON Universe</h1>
+        <p class="cosmic-subtitle">Ecosystem Explorer</p>
+      </header>
+
+      <div id="universe" class="universe">
+        <div id="solar-system" class="solar-system">
+          <div
+            id="ton-sun"
+            class="sun"
+            onclick="
+              openPanel(
+                'TON',
+                'Layer 1 Blockchain',
+                'The Open Network (TON) is a fully decentralized layer-1 blockchain designed by Telegram to onboard billions of users. It features ultra-fast transactions, tiny fees, and a massive ecosystem of native Web3 apps.',
+                'Core ecosystem foundation.',
+                'https://ton.org',
+                '/assets1/ton.jpeg',
+              )
+            "
+          >
+            <img src="/assets1/ton.jpeg" alt="TON" />
+            <div class="sun-glow"></div>
+          </div>
+        </div>
+      </div>
+      <p class="signature">Artwork by:@SuYoGo</p>
+
+      <div id="info-overlay" class="info-overlay" onclick="closePanel()"></div>
+      <div id="info-panel" class="info-panel">
+        <button class="close-btn" onclick="closePanel()">×</button>
+        <div class="panel-header">
+          <img id="panel-logo" src="/assets1/ton.jpeg" alt="Logo" />
+          <div>
+            <h2 id="panel-title">dApp Name</h2>
+            <span id="panel-category" class="category-badge">Category</span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p><strong>Description:</strong> <span id="panel-desc">...</span></p>
+          <p><strong>Role in TON:</strong> <span id="panel-role">...</span></p>
+          <a id="panel-link" href="#" target="_blank" class="action-btn"
+            >Visit Website</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
